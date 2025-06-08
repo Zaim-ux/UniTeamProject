@@ -1,0 +1,38 @@
+
+<!-- This is what the CUSTOMER sees when submitting a call to waiters -->
+<head>
+    <title>Call Waiter</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Call Waiter</div>
+        <ul class="pages">
+            <li><a href="{% url 'filteredItems' %}">Back</a></li>
+        </ul>
+    </nav>
+    <br> 
+    <div class="indentWithin">
+        <a href="{% url 'filteredItems' %}">Back</a>
+    </div>
+    <br>
+    <form action="{% url 'sendWaiterCall' %}" method="post">
+        {% csrf_token %}
+        <br>
+        <fieldset class="indentWithin">
+            <legend><h1>Send Waiter Call</h1></legend>
+            {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+            <label for="table">Table number:</label>
+            <br>
+            <input type="text" name="table" id="table">
+            <br><br>
+            <label for="message">Reason for call:</label>
+            <br>
+            <textarea name="message" id="message" rows="4" cols="50"></textarea>
+
+            <input type="hidden" name="origin" id="origin" value="CUS">
+        </fieldset>
+        <input type="submit" value="Send Call">
+    </form>
+</body>

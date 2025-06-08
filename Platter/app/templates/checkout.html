@@ -1,0 +1,43 @@
+<!-- Customer sees just before they move to payment page -->
+
+<head>
+    <title>Checkout</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Checkout</div>
+        <ul class="pages">
+            <li><a href="{% url 'filteredItems' %}">Continue Order</a></li>
+            <li><a href="{% url 'authorizePayment' %}">Proceed to Payment</a></li>
+        </ul>
+    </nav>
+    <br>
+    <div class="indentWithin">
+        <ul>
+            {% for item_id, quantity in cart.items %}
+                <li>{{ item_id }} - {{ quantity }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+
+        <a href="{% url 'filteredItems' %}">Continue Order</a>
+
+    </div>
+    <form action="/app/sendOrder/" method="post">
+        {% csrf_token %}
+        <br>
+        <fieldset class="indentWithin">
+            <legend><h1>Send Order</h1></legend>
+            {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+            <label for="tableID">Enter table number:</label>
+            <br>
+            <input type="text" name="tableID" id="tableID">
+            <input type="hidden" name="status" id="status" value="REC">
+        </fieldset>
+        <input type="submit">
+    </form>
+
+</body>
+</html>

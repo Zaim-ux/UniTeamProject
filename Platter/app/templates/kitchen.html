@@ -1,0 +1,71 @@
+<!-- For kitchen staff, can change order status and call waiter -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Orders</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'app/kitchen.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">Kitchen Orders</div>
+    <ul class="pages">
+      <li><a href="{% url 'kitchenCallWaiter' %}"><i class="fa-regular fa-bell"></i>&nbsp;Notify Waiter</a></li>
+      <li><a href="{% url 'staffPick' %}">Staff</a></li>
+    </ul>
+  </nav>
+  <article class="orders">
+    <section class="grid" id="grid1">
+      {% for order in RECOrders %}
+        <div class="staff-order">
+          <!-- might use same format as in waiterCalls but having css issues -->
+          <p>Table {{ order.table }}:<br> {{ order.quantity }}X {{ order.menuItem }}<br>{{ order.timestamp|time:"H:i" }}</p>
+          <form method="post" action="{% url 'moveToCooking' order_id=order.orderID %}">
+            {% csrf_token %}
+            <button type="submit" class="RECStatus bottom-button">Start Cooking</button>
+        </form>
+        </div>
+      {% endfor %}
+    </section>
+    <section class="grid" id="grid2">
+      {% for order in CKGOrders %}
+        <div class="staff-order">
+          <p>Table {{ order.table }}:<br> {{ order.quantity }}X {{ order.menuItem }}<br>{{ order.timestamp|time:"H:i" }}</p>
+          <form method="post" action="{% url 'sendToWaiter' order_id=order.orderID %}">
+            {% csrf_token %}
+            <button type="submit" class="RECStatus bottom-button">Send to Waiter</button>
+        </form>
+        </div>
+      {% endfor %}
+    </section>
+  </article>
+
+  <script>
+    $(document).ready(function() {
+
+    $('.RECStatus').click(function() {
+        location.reload();
+    });
+
+    $('.CKGStatus').click(function() {
+        location.reload();
+    });
+
+
+    });
+
+  </script>
+
+  </body>
+

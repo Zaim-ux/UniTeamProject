@@ -1,0 +1,43 @@
+<!-- For testing without worrying about other templates -->
+
+<head>
+    <title>Debug</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+<body>
+    <div class = "container">
+    <div class="waiterGrid"> 
+    {% for call in waiterCalls %}
+        {% if call.origin == 'KIT' %}
+
+        <!-- <p>test</p> -->
+        <!-- <p><a>{{ call }}</a></p> -->
+        <!-- <span class="timestamp">{{ call.timestamp|time:"H:i" }}</span> -->
+        <!-- <form method="post" action="{% url 'clearWaiterCall' waiter_call_id=call.waiterCallID %}">
+            {% csrf_token %}
+            <button type="submit" class="staffButton">Resolved</button>
+        </form> -->
+        <!-- <div class="waiter-call"> test </div> -->
+
+        <div class="waiter-call">
+            <p><a>{{ call }}</a></p>
+            <span class="timestamp">{{ call.timestamp|time:"H:i" }}</span>
+            <form method="post" action="{% url 'clearWaiterCall' waiter_call_id=call.waiterCallID %}">
+                {% csrf_token %}
+                <button type="submit" class="staffButton">Resolved</button>
+            </form>
+        </div>
+
+
+        {% endif %}
+    {% endfor %}
+    </div>
+    </div>
+
+
+
+
+
+
+</body>

@@ -1,0 +1,18 @@
+
+
+<!-- This is what the CUSTOMER sees when submitting a call to waiters -->
+<head>
+    <title>Staff Page Select</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Staff Pages</div>
+        <ul class="pages">
+            <li><a href="{% url 'waiterCalls' %}">Waiter</a></li>
+            <li><a href="{% url 'kitchen' %}">Kitchen</a></li>
+        </ul>
+    </nav>
+</body>
+  

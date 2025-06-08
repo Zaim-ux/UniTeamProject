@@ -1,0 +1,75 @@
+<!-- Currently the first page people see -->
+<!-- options to see menu items, apply filters, add to basket, callWaiter and checkout -->
+<!DOCTYPE html>
+<head>
+    <title>Menu</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{%  static 'app/menu-page.js' %}"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">View Menu</div>
+    <!-- <div class="searchbar">
+        <form id = "form">
+          <input type="text" name="search" placeholder="Input text">
+          <button type="search">Search</button>
+        </form>
+    </div> -->
+    <ul class="pages">
+        <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        <li><a href="{% url 'callWaiter' %}">Call Waiter</a></li>
+        <li><a href="{% url 'orderStatus'%}">Track Order</a></li>
+    </ul>
+</nav>
+<div class = "container">
+    <div class="sidenav">
+        <h3 class="sidenav-header">Categories</h3>
+        <ul>
+            <li id = "startersToggle">Starter</li>
+            <li id = "mainsToggle">Main</li>
+            <li id = "dessertToggle">Dessert</li>
+            <li id = "drinksToggle">Drinks</li>
+        </ul>
+        <h3 class="sidenav-header">Dietary</h3>
+        <ul>
+            <li id = "dairyToggle">Dairy</li>
+            <li id = "nutsToggle">Nuts</li>
+            <li id = "glutenToggle">Gluten</li>
+            <li id = "vegetarianToggle">Vegetarian</li>
+        </ul>
+        <h3 class="sidenav-header">Spice Level</h3>
+        <ul>
+            <li id = "mildToggle">Mild</li>
+            <li id = "hotToggle">Hot</li>
+            <li id = "atomicToggle">Atomic</li>
+        </ul>
+        <div class="btns-group">
+            <button type="button" id="applyF" class="btns">Apply </button>
+            <button type="button" id="clearF" class="btns">Clear </button>
+        </div>
+    </div>
+
+    <div class="grid">
+        {% if itemsOnMenu %}
+            {% for item in itemsOnMenu %}
+                <div class="menu-item">
+                    <img src="{{ item.image.url}}" alt="">
+                    <p><a href="{% url 'itemInfo' item.menuItemID %}">{{ item.name }} - £{{ item.price|floatformat:2 }}</a></p>
+                    <button type="button" onclick="location.href = '/app/addItem/{{ item.menuItemID }}'">Add to basket</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if itemsNotOnMenu %}
+            {% for item in itemsNotOnMenu %}
+                <div class="menu-item">
+                    <img src="{{ item.image.url}}"  alt="" style="opacity: 0.5;">
+                    <p><a href="{% url 'itemInfo' item.menuItemID %}">{{ item.name }} - £{{ item.price|floatformat:2 }}</a></p>
+                    <p>Not available</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+</body>

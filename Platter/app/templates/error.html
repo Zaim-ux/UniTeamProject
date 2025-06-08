@@ -1,0 +1,23 @@
+<!-- Page to show if an error occurs, leads ANY visitor back to the menu -->
+
+<!-- Should add an option to sign in/log in so staff can revisit their previous site -->
+<!DOCTYPE html>
+<head>
+   <title>Menu</title>
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Error!</div>
+    </nav>
+    <br>
+
+    <div style="text-align: center;">
+        <h1>We ran into a problem!</h1>
+        <br>
+        <h2>Return to menu:</h2>
+        <br>
+        <p><a href="{% url 'filteredItems' %}">Menu</a></p>
+    </div>
+</body>

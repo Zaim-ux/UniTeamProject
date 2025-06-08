@@ -1,0 +1,150 @@
+
+
+<!-- this is the view that WAITERS see-->
+
+<!-- Calls from customers and kitchen, orders from ready to deliver, and unpaid. functions for each -->
+<head>
+    <title>Waiter View</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+
+    <!-- see note in refresh.js -->
+    <!-- <script src="{% static 'app/templates/refresh.js' %}"></script> (?) --> 
+    <script>
+        function saveScrollPosition() {
+            var scrollPosition = window.pageYOffset;
+                localStorage.setItem('scrollPosition', scrollPosition);
+        }
+
+        //if its not set use 0
+        function applyScrollPosition() {
+            var scrollPosition = localStorage.getItem('scrollPosition');
+            window.scrollTo(0, parseInt(localStorage.getItem('scrollPosition')) ?? 0);
+        } 
+
+    //every time we scroll save it, when reloading apply the saved scroll value
+    window.addEventListener('scroll', saveScrollPosition);
+    window.addEventListener('load', applyScrollPosition);
+    </script>
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Waiter View</div>
+        <ul class="pages">
+            <li><a href="{% url 'editMenu' %}">Edit Menu</a></li>
+            <li><a href="{% url 'staffPick' %}">Staff</a></li>
+        </ul>
+    </nav>
+
+    <h1>
+        <!-- NOTE this only shows orders with status RTC -->
+        Orders ready to deliver:
+    </h1>
+    <br>    
+    
+    <!-- ideally group the same table number orders into one big box or element -->
+        <!-- {% regroup RTCOrders by table as orders_by_table %} -->
+    <div class="waiterGrid">
+    {% for order in RTCOrders %}
+        <div class="staff-order">
+            <div class="subGrid">
+                <p><a>Table {{ order.table }}:<br> {{ order.quantity }}X {{ order.menuItem }} <br>{{ order.timestamp|time:"H:i" }}</a></p>
+                <img src="{{ order.menuItem.image.url }}" alt="{{ order.menuItem.name }}">
+                <div>
+                    <form method="post" action="{% url 'changeOrderStatus' order_id=order.orderID new_status='UPD'%}">
+                        {% csrf_token %}
+                        <button type="submit" class="staffButton">Delivered</button>
+                    </form>
+                    <form method="post" action="{% url 'cancelOrder' order_id=order.orderID %}">
+                        {% csrf_token %}
+                        <button type="submit" class="staffButton">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <h1>Unpaid orders:</h1>
+    <br>
+    <div class="waiterGrid">
+        
+        
+        {% for order in UPDOrders %}
+            <div class="staff-order">
+                <div class="subGrid">
+                    <p><a>Table {{ order.table }}: {{ order.quantity }}X {{ order.menuItem }}</a></p>
+                    <img src="{{ order.menuItem.image.url }}" alt="{{ order.menuItem.name }}">
+                    <div>
+                        <form method="post" action="{% url 'changeOrderStatus' order_id=order.orderID new_status='COM'%}">
+                            {% csrf_token %}
+                            <button type="submit" class="staffButton">Paid</button>
+                        </form>
+                        <form method="post" action="{% url 'cancelOrder' order_id=order.orderID %}">
+                            {% csrf_token %}
+                            <button type="submit" class="staffButton">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+    <h1>
+        Kitchen Calls:
+    </h1>
+
+    <!-- <div class = "container"> -->
+        <!-- calls from kitchen -->
+        <div class="waiterGrid"> 
+        {% for call in waiterCalls %}
+            <!-- <script>
+                console.log("call realised (any)")
+            </script> -->
+            {% if call.origin == 'KIT' %}
+            <!-- <script>
+                console.log("call realised (kitchen specific)")
+            </script> -->
+                <div class="staff-order">
+                    <p><a>{{ call }}</a></p>
+                    <span class="timestamp">{{ call.timestamp|time:"H:i" }}</span>
+                    <form method="post" action="{% url 'clearWaiterCall' waiter_call_id=call.waiterCallID %}">
+                        {% csrf_token %}
+                        <button type="submit" class="staffButton">Resolved</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div> <!-- end grid of calls -->
+    <!-- </div> -->
+        <!-- KITCHEN CALLS ABOVE -->
+
+
+    <h1>
+        Customer Calls:
+    </h1>
+
+    <!-- <div class = "container"> -->
+        <!-- calls from customers -->
+        <div class="waiterGrid"> 
+            {% for call in waiterCalls %}
+            {% if call.origin == 'CUS' %}
+                <div class="staff-order">
+                    <p><a>{{ call }}</a></p>
+                    <span class="timestamp">{{ call.timestamp|time:"H:i" }}</span>
+                    <form method="post" action="{% url 'clearWaiterCall' waiter_call_id=call.waiterCallID %}">
+                        {% csrf_token %}
+                        <button type="submit" class="staffButton">Clear</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div> <!-- end grid of calls -->
+    <!-- </div> -->
+        <!-- CUSTOMR CALLS ABOVE -->
+     
+    
+    
+
+</body>

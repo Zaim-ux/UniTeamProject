@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<nav class="navbar">
+    <div class="logo">Payment Details</div>
+    <ul class="pages">
+        <li><a href="{% url 'checkout' %}">Checkout</a></li>
+    </ul>
+</nav>
+    <title>Checkout</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorize Payment</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Authorization</h1>
+        <form action="{% url 'filteredItems' %}" method="post">
+            {% csrf_token %}
+            <label for="card_number">Card Number:</label>
+            <input type="text" id="card_number" name="card_number" required><br><br>
+            <label for="expiration_date">Expiration Date:</label>
+            <input type="date" id="expiration_date" name="expiration_date" required><br><br>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required><br><br>
+            <label for="table_number">Table Number:</label>
+            <input type="text" id="table_number" name="table_number" required><br><br>
+            <label for="payment_method">Payment Method:</label><br>
+            <input type="radio" id="card" name="payment_method" value="card" required>
+            <label for="card">Card</label><br>
+            <input type="radio" id="cash" name="payment_method" value="cash" required>
+            <label for="cash">Cash</label><br><br>
+            <button type="submit">Confirm Payment</button>
+        </form>
+    </div>
+</body>
+</html>

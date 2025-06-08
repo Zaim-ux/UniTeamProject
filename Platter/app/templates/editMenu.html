@@ -1,0 +1,27 @@
+<!-- Staff (waiters) can SET what menu items are avaliable for purchase  -->
+
+<!DOCTYPE html>
+<head>
+   <title>Edit Menu</title>
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
+</head>
+
+<body>
+    <nav class="navbar"> 
+        <div class="logo">Edit Menu</div>
+        <ul class="pages">
+            <li><a href="{% url 'waiterCalls' %}">Back</a></li>
+            <!-- user story only asks for waiter
+            however we could do this for kitchen as well, waiting on staff select page to exist -->
+        </ul>
+    </nav>
+    
+    {% if itemsOnMenu %}
+        {% for item in itemsOnMenu %}
+            <p class="itemToggle"><a href="{% url 'toggleAvailability' item.menuItemID %}">{% if item.available %}✅{% else %}❌{% endif %} - {{ item.name }}</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No items loaded into Database.</p>
+    {% endif %}
+</body>

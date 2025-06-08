@@ -1,0 +1,54 @@
+
+p, img {
+    margin-left: 20px;
+}
+
+img {
+    margin-top: 15px;
+    width: auto;
+    max-width: 600px;
+    height: 300px;
+    border-radius: 5px;
+    border: 7px solid #235f64;
+}
+
+p {
+    padding-left: 21px;
+    font-size: 50px;
+}
+
+a {
+    padding-left: 10px;
+    position: relative;
+    left: 24px;
+
+}
+
+.description, .ingredients, .allergies {
+    width: 600px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    right: 40px;
+}
+
+.description {
+    top: 150px;
+    border: 8px solid #0c3240;
+    background-color: #5ca5bf;
+}
+
+
+.ingredients {
+    top: 300px;
+    border: 8px solid #0c4011;
+    background-color: #5ebf5c;
+}
+
+.allergies {
+    top: 450px;
+    border: 8px solid #400c0c;
+    background-color: #bf5c5c;
+}
+

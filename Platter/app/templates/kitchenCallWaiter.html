@@ -1,0 +1,34 @@
+<!-- Create a waiter call with origin as Kitchen -->
+
+<head>
+    <title>Contact Waiters</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">Contact Waiters</div>
+    <ul class="pages">
+        <li><a href="{% url 'kitchen' %}">Back</a></li>
+    </ul>
+</nav>
+<form action="{% url 'sendWaiterCall' %}" method="post">
+    {% csrf_token %}
+    <br>
+    <fieldset class="indentWithin">
+        <legend><h1>Send Kitchen Call</h1></legend>
+        {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+        <!-- every issue the kitchen has which is worth any waiter knowing
+        must be tied to a table -->
+        <label for="table">Table number:</label>
+        <input type="text" name="table" id="table">
+        <br><br>
+        <label for="message">Reason for call:</label>
+        <textarea name="message" id="message" rows="4" cols="50"></textarea>
+
+        <input type="hidden" name="origin" id="origin" value="KIT">
+        <!-- kitchen not customer is sending it  -->
+    </fieldset>
+    <input type="submit" value="Send Call">
+</form>
+</body>

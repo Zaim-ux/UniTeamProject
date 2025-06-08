@@ -1,0 +1,93 @@
+<!-- See more information on a menu item -->
+
+<head>
+    <title>Item Info</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app/itemInfo.css' %}">
+</head>
+<b>
+    <nav class="navbar">
+        <div class="logo">{{ item.name }}</div>
+        <ul class="pages">
+            <li><a href="{% url 'filteredItems' %}">Back to Menu</a></li>
+        </ul>
+    </nav>
+</b>
+<br>
+<img src="{{ item.image.url }}" alt="{{ item.name }}">
+<p>£{{ item.price|floatformat:2 }} - {{ item.calories }} Calories</p>
+<br>
+<a href="/app/addItem/{{ item.menuItemID }}">Add to basket</a>
+<a href="/app">Resume without adding</a>
+<br><br><br>
+<div class = "description">Description:<br> {{ item.description }} </div>
+<div class = "ingredients">Ingredients:<br>
+    {% for inclusion in ingredientInclusions %}
+        - {{ inclusion.ingredient.name }}
+    {% endfor %}
+</div>
+<div class = "allergies">Allergies and Notes:<br>
+    <span style="text-transform:uppercase;">
+{{ item.allergy }}
+</span>
+</div>
+
+
+
+<style>
+    p, img{
+        margin-left: 20px;
+    }
+
+    img{
+        margin-top: 15px;
+        width: auto;
+        max-width: 600px;
+        height: 300px;
+        border-radius: 5px;
+        border: 7px solid #235f64;
+    }
+
+    p{
+        padding-left: 21px;
+        font-size: 50px;
+    }
+
+    a{
+        padding-left: 10px;
+        position:relative;
+        left:24px;
+
+    }
+
+    .description, .ingredients, .allergies {
+        margin-top: 10px;
+        width: 600px;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        position: absolute;
+        right: 40px;
+    }
+
+    .description {
+        top: 150px;
+        border: 8px solid #0c3240;
+        background-color: #5ca5bf;
+    }
+
+
+    .ingredients {
+        top: 300px;
+        border: 8px solid #0c4011;
+        background-color: #5ebf5c;
+    }
+
+    .allergies {
+        top: 450px;
+        border: 8px solid #400c0c;
+        background-color: #bf5c5c;
+    }
+
+</style>

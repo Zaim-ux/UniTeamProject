@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Thank You!</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Thank you for ordering!</div>
+        <ul class="pages">
+            <li><a href="{% url 'filteredItems' %}">Menu</a></li>
+            <li><a href="{% url 'orderStatus' %}">Track Order</a></li>
+        </ul>
+    </nav>
+
+    <h1>Thank You for Your Order! to track any of them, please use the provided order ID's.</h1>
+    <p>Your order ID(s) are:</p>
+        {% for order in orders %}
+        <p>{{ order.orderID }} ({{ order.quantity }}X {{ order.menuItem }})</p>
+        {% endfor %}
+</body>
+</html>

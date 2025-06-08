@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <title>Order Status</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Order Status</div>
+        <ul class="pages">
+            <li><a href="{% url 'filteredItems' %}">Menu</a></li>
+            <li><a href="{% url 'callWaiter' %}">Call Waiter</a></li>
+        </ul>
+    </nav>
+
+    <form action="{% url 'orderStatus' %}" method="GET">
+        <br>
+        <fieldset class="indentWithin">
+            <legend><h1>Enter your order ID to track it</h1></legend>
+            <br>
+            <input type="text" name="order_id" id="order_id" placeholder="Enter order ID">
+        </fieldset>
+        <button type="submit" style="margin: 0 20px;">Track Order</button>
+    </form>
+
+    <div class="status" style="margin: 0 20px;" >
+        <div class="inner">
+        <h2>Order status:</h2>
+        </div>
+        {% if order %}
+            {% for order in order %}
+                <p>Order ID: {{ order.orderID }}</p>
+                <p>your order of {{order.quantity}}X {{ order.menuItem }} is:</p>
+                <p>{{ order.get_status_display }}</p>
+            {% endfor %}
+        {% else %}
+            <p>enter a valid order ID</p>
+        {% endif %}
+    </div>
+
+</body>

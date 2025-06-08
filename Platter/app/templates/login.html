@@ -1,0 +1,36 @@
+<!-- Staff login, permission to access sites like kitchen, editMenu etc -->
+<!DOCTYPE html>
+<head>
+    <title> Staff Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
+</head>
+
+<title> Staff Login</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/style.css' %}"> </head>
+<body>
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>Staff Login</h3>
+            </div>
+        </div>
+        <form class="login-form" action="" method=POST>
+            {% csrf_token %}
+            <div>
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter Username"/>
+                </div>
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="password" placeholder="Enter Password"/>
+                </div>
+                <button>Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>

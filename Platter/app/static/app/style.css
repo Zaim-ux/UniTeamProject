@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    margin: 5px 30px;
+}
+
+nav {
+    width: 100%;
+    padding: 20px 70px;
+    background: rgb(232, 36, 75);
+    border-bottom: 3px solid black;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    z-index: 1;
+    padding-block: 2rem;
+    position: sticky;
+    top: 0;
+}
+
+nav * {
+    align-items: flex-start;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #729caa;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.pages {
+    display: flex;
+    list-style-type: none;
+}
+
+.pages li {
+    margin: 3px;
+}
+
+.pages li a {
+    color: black;
+    font-size: 32px;
+    border: 3px solid whitesmoke;
+    padding: 10px 30px;
+    margin: 0 15px;
+    background-color: whitesmoke;
+    transition: 0.3s ease;
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.pages li a:hover {
+    border-color: whitesmoke;
+}
+
+.searchbar {
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+}
+
+.logo {
+    font-size: 40px;
+}
+
+.status{
+    border:5px outset red;
+    background-color: lightblue;
+    text-align: center;
+    width: 30%;
+    height:20%;
+}
+
+.inner{
+    border:5px outset red;
+    background-color: lightblue;
+    text-align: center;
+}
+
+.sidenav {
+    padding: 16px;
+    border-right: 3px solid black;
+    max-width: 250px;
+    background-color: #357186;
+
+    > h3 {
+        margin: 10px 10px;
+        font-size: 30px;
+    }
+
+    > ul {
+        margin-top: 8px;
+        list-style-type: none;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+}
+
+.sidenav li {
+    padding: 8px 8px;
+    border: 3px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 9px #000000;
+    cursor: pointer;
+}
+
+.sidenav li:hover {
+    background: #9ab8c3;
+    color: white;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    height: 100%;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* gap: 10px; */
+    padding: 15px;
+    flex: 1;
+    background-color: #729caa;
+    overflow-y: auto;
+}
+
+.detailed-item img {
+    border-radius: 10px;
+    border: #357186;
+    margin: 20px;
+    outline: #44c6b5;
+    width: 400px;
+}
+
+.detailed-item p {
+    color: #d0d0d0;
+    margin: 20px;
+    font-size: 40px;;
+}
+
+.bottom-button {
+    max-width: 100px;
+}
+
+/* #single food item on the menu */
+/* component is reused for other similar grid elements */
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: bold;
+    border: 7px solid #9e6e5d;
+    background-color: #5d8d9e;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    box-shadow: 0 0 9px #000000;
+    max-height: 250px;
+}
+
+.menu-item:hover {
+    border: 7px solid #c5a89e;
+}
+
+.menu-item a:visited,
+.menu-item a:link {
+    color: #850606;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+.menu-item p.alert {
+    color: #C4DCC8;
+}
+
+.menu-item img {
+    max-height: 65%;
+    max-width: 80%;
+    width: auto;
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+    border: #357186;
+    opacity: 0.94;
+    transition: opacity 0.08s, transform 0.08s;
+}
+
+.menu-item img:hover {
+    opacity: 1;
+    transform: scale(1.01);
+}
+
+.menu-item button {
+    margin-top: 1rem;
+    padding-block: .3rem;
+    border-radius: 4px;
+}
+
+
+.login-body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.login-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btns-group {
+    display: flex;
+    gap: 8px;
+    margin-block: 1rem;
+}
+
+.btns {
+    flex: 1;
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: beige;
+    }
+}
+
+/* Seperate grid item, to favor long messages */
+.waiterGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 650px);
+    /* grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); */
+    /* gap: 10px; */
+    padding: 15px;
+    flex: 1;
+}
+
+a:visited,
+a:link {
+    color: #2e305b;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+/* nicer looking if the long wide grid boxes dont have all their elements stacked vertically */
+.subGrid {
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, 160px);
+}
+
+.staff-order:hover {
+    border: 7px solid #c5a89e;
+    /* height: 10px;    */
+}
+
+.staff-order img {
+    height: auto;
+    width: 150px;
+    /* width: 100px */
+    border-radius: 6px;
+    border: #2b5765 solid;
+}
+
+.staff-order {
+    display: flex;
+    flex-direction: column;
+    /*width: 600;*/
+    height: 150px;
+    font-weight: bold;
+    border: 7px solid #9e6e5d;
+    background-color: #5d8d9e;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px;
+    text-align: left;
+    box-shadow: 0 0 9px #000000;
+    overflow: auto;
+}
+
+.itemToggle {
+    font-size: 32px;
+    padding-left: 32px;
+}
+
+.itemToggle a:visited,
+.itemToggle a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.staffButton {
+    padding: 8px 30px;
+    border-radius: 5px;
+    margin: 5px 3px;
+}
+
+.staffButton:hover {
+    background-color: #94d6b3;
+}
+
+input[type="submit"] {
+    padding: 20px 30px;
+    margin: 10px 20px;
+}
+
+.indentWithin label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.indentWithin textarea {
+    padding: 0.5rem;
+}
+
+.indentWithin * {
+    margin: 0 20px;
+}
+
+.container {
+    overflow-y: auto;
+}
+
+.sidenav {
+    position: sticky;
+    left: 0;
+}
+
+.grid {
+    overflow-y: auto;
+}
+
+button {
+    cursor: pointer;
+}
